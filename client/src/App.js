@@ -18,7 +18,12 @@ function App() {
           <p>Account Infos :</p>
           <AccountData accountIndex={0} units={"ether"} precision={2}/>
           <br></br>
+          <p>Token in wallet :</p>
+          <ContractData contract="SimpleBank" method="getBalance"/>
+          <br></br>
+          <p>Token deposit :</p>
           <ContractForm contract="SimpleBank" method="deposit"/>
+          <br></br>
           <p>Token withdraw :</p>
           <ContractForm contract="SimpleBank" method="withdraw"/>
          </div>
