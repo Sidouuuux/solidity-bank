@@ -8,14 +8,13 @@ contract SimpleBank {
         owner = msg.sender;
     }
 
-    function deposit() public payable returns (uint256) {
-        balanceOf[msg.sender] += msg.value;
-        return balanceOf[msg.sender];
+    function deposit(uint256 amount) public payable returns (uint256) {
+        require(amount == msg.value, "Vous n'avez pas déposé assez");
+        return address(this).balance;
     }
 
     function withdraw(uint256 withdrawAmount) public {
-        if (withdrawAmount <= balanceOf[msg.sender]) {
-            balanceOf[msg.sender] -= withdrawAmount;
+        if (withdrawAmount <= address(this).balance) {
             msg.sender.transfer(withdrawAmount);
         }
     }
@@ -24,7 +23,6 @@ contract SimpleBank {
         return balanceOf[msg.sender];
     }
 
-    /// @return The balance of the Simple Bank contract
     function getContractBalance() public view returns (uint256) {
         return address(this).balance;
     }
